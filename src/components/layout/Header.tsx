@@ -21,6 +21,7 @@ export const Header: React.FC = () => {
                         <li><a href="#about" onClick={handleLinkClick}>About</a></li>
                         <li><a href="#skills" onClick={handleLinkClick}>スキル</a></li>
                         <li><a href="#portfolio" onClick={handleLinkClick}>実績</a></li>
+                        <li><a href="#links" onClick={handleLinkClick}>リンク</a></li>
                         <li><a href="#contact" onClick={handleLinkClick}>お問い合わせ</a></li>
                     </ul>
                     <div className={styles.mobileToggle} onClick={toggle}>

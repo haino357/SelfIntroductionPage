@@ -24,3 +24,12 @@ export interface SocialLink {
     icon: string;
     ariaLabel: string;
 }
+
+export interface LinkItem {
+    id: number;
+    title: string;
+    description: string;
+    url: string;
+    icon: string;
+    category: string;
+}
