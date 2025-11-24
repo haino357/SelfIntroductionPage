@@ -1,0 +1,27 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+build
+.vite
+
+# Cache
+.cache
+.parcel-cache
+
+# Config files (already checked by TypeScript)
+*.config.js
+*.config.ts
+*.config.cjs
+
+# Logs
+*.log
+
+# Coverage
+coverage
+
+# Environment files
+.env
+.env.local
+.env.*.local

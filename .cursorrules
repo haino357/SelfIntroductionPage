@@ -1,0 +1,347 @@
+# AI Assistant Rules for SelfIntroductionPage
+
+## Project Overview
+This is a personal portfolio/self-introduction website built with React, TypeScript, and Vite.
+The site is designed to be deployed on GitHub Pages.
+
+## Technology Stack
+- **Framework**: React 18+ with TypeScript
+- **Build Tool**: Vite
+- **Styling**: CSS Modules with modern CSS features
+- **Deployment**: GitHub Pages
+
+## Code Style Guidelines
+
+### TypeScript Rules
+- **MUST** use strict TypeScript with proper type annotations
+- **MUST** prefer interfaces over types for object shapes
+- **MUST** avoid `any` type - use `unknown` if type is truly unknown
+- **MUST** use proper return types for all functions
+- **SHOULD** use union types and type guards for conditional logic
+- **SHOULD** use `const` assertions for literal types
+- **SHOULD** define types close to where they're used
+
+```typescript
+// ✅ Good
+interface UserProps {
+  name: string;
+  age: number;
+  isActive?: boolean;
+}
+
+// ❌ Bad
+type UserProps = {
+  name: any;
+  age: any;
+}
+```
+
+### React Component Rules
+
+#### Component Structure
+- **MUST** use functional components exclusively (no class components)
+- **MUST** use named exports (avoid default exports)
+- **MUST** define prop interfaces before component
+- **SHOULD** keep components under 200 lines
+- **SHOULD** extract complex logic into custom hooks
+
+```typescript
+// ✅ Good
+interface ButtonProps {
+  label: string;
+  onClick: () => void;
+  variant?: 'primary' | 'secondary';
+}
+
+export const Button: React.FC<ButtonProps> = ({ label, onClick, variant = 'primary' }) => {
+  return <button onClick={onClick} className={styles[variant]}>{label}</button>;
+};
+
+// ❌ Bad
+export default function Button(props: any) {
+  return <button onClick={props.onClick}>{props.label}</button>;
+}
+```
+
+#### Hooks Usage
+- **MUST** follow Rules of Hooks (only call at top level, only in React functions)
+- **MUST** include all dependencies in useEffect/useMemo/useCallback arrays
+- **SHOULD** use useCallback for functions passed as props
+- **SHOULD** use useMemo for expensive calculations
+- **SHOULD** extract repeated hook logic into custom hooks
+
+```typescript
+// ✅ Good
+const memoizedValue = useMemo(() => {
+  return expensiveCalculation(data);
+}, [data]);
+
+const handleClick = useCallback(() => {
+  doSomething(id);
+}, [id]);
+
+// ❌ Bad
+const value = expensiveCalculation(data); // Recalculates every render
+const handleClick = () => doSomething(id); // New function every render
+```
+
+#### State Management
+- **MUST** use useState for local component state
+- **MUST** use useReducer for complex state logic
+- **SHOULD** lift state up when shared between components
+- **SHOULD** use Context API sparingly (only for truly global state)
+- **AVOID** prop drilling more than 2-3 levels
+
+```typescript
+// ✅ Good - Simple state
+const [count, setCount] = useState(0);
+
+// ✅ Good - Complex state
+const [state, dispatch] = useReducer(reducer, initialState);
+
+// ❌ Bad - Unnecessary state
+const [doubled, setDoubled] = useState(count * 2); // Derive from count instead
+```
+
+### File Organization
+- Components: `src/components/`
+- Section components: `src/components/sections/`
+- Custom hooks: `src/hooks/`
+- Utilities: `src/utils/`
+- Types/interfaces: `src/types/`
+- Assets: `src/assets/` or `public/`
+
+### Naming Conventions
+- Components: PascalCase (e.g., `Header.tsx`, `ProfileSection.tsx`)
+- Hooks: camelCase with 'use' prefix (e.g., `useScrollAnimation.ts`)
+- Utilities: camelCase (e.g., `formatDate.ts`)
+- CSS Modules: `ComponentName.module.css`
+- Constants: UPPER_SNAKE_CASE
+- Event handlers: `handle` prefix (e.g., `handleClick`, `handleSubmit`)
+- Boolean variables: `is/has/should` prefix (e.g., `isLoading`, `hasError`)
+
+### CSS/Styling Rules
+- **MUST** use CSS Modules for component-specific styles
+- **MUST** use semantic class names
+- **MUST** implement mobile-first responsive design
+- **SHOULD** use CSS custom properties (variables) for theming
+- **SHOULD** use modern CSS features (Grid, Flexbox, custom properties)
+- **AVOID** inline styles (use CSS Modules instead)
+- **AVOID** !important (fix specificity instead)
+
+```css
+/* ✅ Good */
+.container {
+  display: grid;
+  gap: var(--spacing-md);
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 2rem;
+  }
+}
+
+/* ❌ Bad */
+.container {
+  display: block !important;
+  padding: 20px;
+}
+```
+
+## React Patterns to Follow
+
+### Component Composition
+```typescript
+// ✅ Good - Composable components
+export const Card: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div className={styles.card}>{children}</div>
+);
+
+export const CardHeader: React.FC<{ title: string }> = ({ title }) => (
+  <h2 className={styles.header}>{title}</h2>
+);
+
+// Usage
+<Card>
+  <CardHeader title="Title" />
+  <p>Content</p>
+</Card>
+```
+
+### Custom Hooks Pattern
+```typescript
+// ✅ Good - Reusable logic
+export const useLocalStorage = <T,>(key: string, initialValue: T) => {
+  const [value, setValue] = useState<T>(() => {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : initialValue;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+
+  return [value, setValue] as const;
+};
+```
+
+### Error Boundaries
+```typescript
+// ✅ Good - Wrap components that might error
+<ErrorBoundary fallback={<ErrorFallback />}>
+  <SomeComponent />
+</ErrorBoundary>
+```
+
+## Anti-Patterns to Avoid
+
+### ❌ Don't Mutate State
+```typescript
+// ❌ Bad
+const [items, setItems] = useState([1, 2, 3]);
+items.push(4); // Mutation!
+setItems(items);
+
+// ✅ Good
+setItems([...items, 4]);
+```
+
+### ❌ Don't Use Index as Key
+```typescript
+// ❌ Bad
+{items.map((item, index) => <div key={index}>{item}</div>)}
+
+// ✅ Good
+{items.map((item) => <div key={item.id}>{item.name}</div>)}
+```
+
+### ❌ Don't Define Components Inside Components
+```typescript
+// ❌ Bad
+const Parent = () => {
+  const Child = () => <div>Child</div>; // Re-created every render!
+  return <Child />;
+};
+
+// ✅ Good
+const Child = () => <div>Child</div>;
+const Parent = () => <Child />;
+```
+
+### ❌ Don't Forget Cleanup in useEffect
+```typescript
+// ❌ Bad
+useEffect(() => {
+  const interval = setInterval(() => {}, 1000);
+}, []);
+
+// ✅ Good
+useEffect(() => {
+  const interval = setInterval(() => {}, 1000);
+  return () => clearInterval(interval);
+}, []);
+```
+
+## Performance Best Practices
+
+### Memoization
+- Use `React.memo` for components that render often with same props
+- Use `useMemo` for expensive calculations
+- Use `useCallback` for functions passed to memoized components
+
+### Code Splitting
+```typescript
+// ✅ Good - Lazy load routes/heavy components
+const HeavyComponent = lazy(() => import('./HeavyComponent'));
+
+<Suspense fallback={<Loading />}>
+  <HeavyComponent />
+</Suspense>
+```
+
+### Image Optimization
+- Use WebP format when possible
+- Implement lazy loading for images
+- Provide width/height to prevent layout shift
+
+## Accessibility Requirements
+
+### Semantic HTML
+- **MUST** use semantic elements (`<nav>`, `<main>`, `<section>`, `<article>`)
+- **MUST** maintain proper heading hierarchy (h1 → h2 → h3)
+- **MUST** provide alt text for images
+- **MUST** use `<button>` for actions, `<a>` for navigation
+
+### ARIA
+```typescript
+// ✅ Good
+<button aria-label="Close dialog" onClick={handleClose}>
+  <CloseIcon />
+</button>
+
+<div role="alert" aria-live="polite">
+  {errorMessage}
+</div>
+```
+
+### Keyboard Navigation
+- **MUST** ensure all interactive elements are keyboard accessible
+- **MUST** provide visible focus indicators
+- **SHOULD** implement logical tab order
+
+## Testing Guidelines
+
+### Unit Tests
+```typescript
+// ✅ Good - Test behavior, not implementation
+test('increments counter when button clicked', () => {
+  render(<Counter />);
+  const button = screen.getByRole('button', { name: /increment/i });
+  fireEvent.click(button);
+  expect(screen.getByText('1')).toBeInTheDocument();
+});
+```
+
+### Test Coverage
+- **MUST** test utility functions
+- **SHOULD** test component rendering
+- **SHOULD** test user interactions
+- **SHOULD** test error states
+
+## Documentation Standards
+
+### JSDoc Comments
+```typescript
+/**
+ * Formats a date string to a localized format
+ * @param date - ISO date string
+ * @param locale - Locale code (default: 'ja-JP')
+ * @returns Formatted date string
+ */
+export const formatDate = (date: string, locale = 'ja-JP'): string => {
+  return new Date(date).toLocaleDateString(locale);
+};
+```
+
+### Component Documentation
+- Document complex props with JSDoc
+- Explain non-obvious behavior
+- Provide usage examples for reusable components
+
+## Git Workflow
+- Write clear, descriptive commit messages
+- Keep commits focused and atomic
+- Use conventional commit format: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `test:`, `chore:`
+
+## AI Assistant Behavior
+- **ALWAYS** consider TypeScript type safety
+- **ALWAYS** follow React best practices and hooks rules
+- **ALWAYS** implement accessibility features
+- **ALWAYS** use CSS Modules for styling
+- **SUGGEST** performance optimizations when relevant
+- **SUGGEST** extracting reusable logic into custom hooks
+- **SUGGEST** splitting large components
+- **ASK** for clarification if requirements are ambiguous
+- **EXPLAIN** complex implementations and design decisions
