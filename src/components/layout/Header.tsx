@@ -15,7 +15,7 @@ export const Header: React.FC = () => {
         <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`} id="header">
             <nav className="container">
                 <div className={styles.navContent}>
-                    <div className={styles.logo}>YourName</div>
+                    <div className={styles.logo}>Introduction</div>
                     <ul className={`${styles.navLinks} ${isOpen ? styles.active : ''}`}>
                         <li><a href="#home" onClick={handleLinkClick}>ホーム</a></li>
                         <li><a href="#about" onClick={handleLinkClick}>About</a></li>
