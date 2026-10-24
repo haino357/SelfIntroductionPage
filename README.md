@@ -33,7 +33,7 @@ npm run preview
 
 - 小さな屋号 → プロフィール → メール → 活動・発信 → フッターの1カラム。
 - メールボタンは `mailto:`。アドレスは選択・コピーできる通常のテキストです。
-- 活動先はGitHub、X、はてなブログ、Zennの順で、同じタブで開きます。
+- 活動先はGitHub、X、はてなブログ、Zenn、Qiitaの順で、同じタブで開きます。
 - 写真、フォーム、スキル・実績一覧、外部フォント・アイコンCDNは使用しません。
 - 従来の未使用コンポーネント・画像は保持しています。LPの表示には組み込んでいません。
 
@@ -43,12 +43,12 @@ npm run preview
 
 設計書第5節の肩書き・紹介文・メール・リンク候補を実装しています。
 特に `tosho427.sysdiv@gmail.com` を仕事用の公開先として継続使用するか、本人による最終確認が必要です。
-本作業では公開、commit、pushを行っていません。
+本番公開は未実施です。実装はPRでレビューします。
 
 既存のGitHub Pages用ベースパスとworkflowは保持しています。
 本番URL確定後にcanonical・`og:url`・必要に応じたOGP画像を設定し、公開後は実URLで表示・リンクを確認してください。
 
 ## アイコン
 
-GitHub・X・Zennは [Simple Icons](https://github.com/simple-icons/simple-icons) のSVGをローカルに保持しています（CC0、各商標は権利者に帰属）。
+GitHub・X・Zenn・Qiitaは [Simple Icons](https://github.com/simple-icons/simple-icons) のSVGをローカルに保持しています（CC0、各商標は権利者に帰属）。
 はてなブログの行は、このLP用の汎用ペンアイコンです。設計モックの画像を切り抜いたものではありません。

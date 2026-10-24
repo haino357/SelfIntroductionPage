@@ -1,5 +1,5 @@
 export interface ActivityLink {
-  readonly id: 'github' | 'x' | 'blog' | 'zenn';
+  readonly id: 'github' | 'x' | 'blog' | 'zenn' | 'qiita';
   readonly name: string;
   readonly description: string;
   readonly url: string;
@@ -32,5 +32,6 @@ export const profile = {
       url: 'https://hai-haino.hatenablog.com/',
     },
     { id: 'zenn', name: 'Zenn', description: '技術記事', url: 'https://zenn.dev/haitak' },
+    { id: 'qiita', name: 'Qiita', description: '技術記事', url: 'https://qiita.com/hai_haino' },
   ] satisfies readonly ActivityLink[],
 } as const;
