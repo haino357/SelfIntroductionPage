@@ -1,14 +1,12 @@
-import React from 'react';
 import styles from './Footer.module.css';
+import { profile } from '../../data/profile';
 
-export const Footer: React.FC = () => {
-    const currentYear = new Date().getFullYear();
+import type { FC } from 'react';
 
-    return (
-        <footer className={styles.footer}>
-            <div className="container">
-                <p>&copy; {currentYear} haino. All rights reserved.</p>
-            </div>
-        </footer>
-    );
-};
+export const Footer: FC = () => (
+  <footer className={styles.footer}>
+    <p>
+      © {new Date().getFullYear()} {profile.brand}
+    </p>
+  </footer>
+);

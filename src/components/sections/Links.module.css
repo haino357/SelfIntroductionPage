@@ -1,129 +1,98 @@
-.sectionDescription {
-    text-align: center;
-    color: var(--color-text-muted);
-    margin-bottom: var(--spacing-lg);
-    font-size: 1.1rem;
+.links {
+  margin-top: 44px;
 }
 
-.linksGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--spacing-md);
+.heading {
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
 }
 
-.linkCard {
-    background: var(--color-bg-card);
-    backdrop-filter: blur(10px);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-md);
-    border: 1px solid var(--color-border);
-    transition: all var(--transition-normal);
-    display: flex;
-    gap: var(--spacing-sm);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
+.list {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.linkCard::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
-    transition: left var(--transition-slow);
+.list li + li {
+  border-top: 1px solid var(--color-border);
 }
 
-.linkCard:hover::before {
-    left: 100%;
+.link {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 80px;
+  padding: 14px 8px;
 }
 
-.linkCard:hover {
-    transform: translateY(-5px);
-    border-color: var(--color-primary);
-    box-shadow: var(--shadow-glow);
+.link:hover {
+  background: #f0f3ee;
 }
 
-.linkIcon {
-    width: 60px;
-    height: 60px;
-    min-width: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-    border-radius: var(--radius-sm);
-    font-size: 1.8rem;
-    color: white;
-    transition: transform var(--transition-normal);
+.link:hover .name {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
-.linkCard:hover .linkIcon {
-    transform: scale(1.1) rotate(5deg);
+.icon {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
-.linkContent {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
+.content {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
-.linkHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: var(--spacing-sm);
+.name,
+.description {
+  display: block;
 }
 
-.linkContent h3 {
-    color: var(--color-text);
-    margin: 0;
-    font-size: 1.3rem;
+.name {
+  font-size: 1.125rem;
+  font-weight: 550;
+  line-height: 1.5;
 }
 
-.category {
-    padding: 0.25rem 0.75rem;
-    background-color: rgba(99, 102, 241, 0.2);
-    color: var(--color-secondary);
-    border-radius: 1rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    white-space: nowrap;
+.description {
+  margin-top: 2px;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
-.linkContent p {
-    color: var(--color-text-muted);
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.5;
+.arrow {
+  flex: 0 0 22px;
+  color: var(--color-text-muted);
 }
 
-.linkArrow {
-    color: var(--color-primary);
-    font-size: 1.2rem;
-    transition: transform var(--transition-normal);
-    margin-top: auto;
-}
+@media (min-width: 768px) {
+  .links {
+    margin-top: 48px;
+  }
 
-.linkCard:hover .linkArrow {
-    transform: translateX(5px);
-}
+  .heading {
+    font-size: 1.5rem;
+  }
 
-@media (max-width: 640px) {
-    .linksGrid {
-        grid-template-columns: 1fr;
-    }
+  .link {
+    gap: 32px;
+    padding-inline: 10px;
+  }
 
-    .linkCard {
-        flex-direction: column;
-        text-align: center;
-    }
+  .icon {
+    flex-basis: 36px;
+    width: 36px;
+    height: 36px;
+  }
 
-    .linkHeader {
-        flex-direction: column;
-        gap: var(--spacing-xs);
-    }
+  .name {
+    font-size: 1.25rem;
+  }
 }

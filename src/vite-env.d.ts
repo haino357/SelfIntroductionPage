@@ -1,9 +1,14 @@
 declare module '*.module.css' {
-    const classes: { [key: string]: string };
-    export default classes;
+  const classes: { [key: string]: string };
+  export default classes;
 }
 
 declare module '*.css' {
-    const content: string;
-    export default content;
+  const content: string;
+  export default content;
+}
+
+declare module '*.svg' {
+  const src: string;
+  export default src;
 }
