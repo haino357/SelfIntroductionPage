@@ -3,6 +3,8 @@
 自己紹介とお問い合わせ先、活動・発信先をまとめた日本語の1ページLPです。
 Obsidianの `self-introduction-lp-design`（2026-10-24）を基に、既存のReact・TypeScript・Viteプロジェクトを改修しています。
 
+公開URL: [https://haino357.github.io/re-system/](https://haino357.github.io/re-system/)
+
 ## ローカルで確認する
 
 ```bash
@@ -10,7 +12,7 @@ npm install
 npm run dev
 ```
 
-表示URLはターミナルの案内を参照してください。既存のベースパスは `/SelfIntroductionPage/` です。
+表示URLはターミナルの案内を参照してください。ベースパスは `/re-system/` です。
 
 ```bash
 npm run build
@@ -42,14 +44,14 @@ SNSは `socials` にまとめています。リンクとQRコードは同じ `ur
 
 [実装用の設計メモと参照画像](docs/design.md) ／ [確認結果](docs/verification.md)
 
-## 公開前の確認
+## 公開設定と原稿の確認
 
 設計書第5節の肩書き・紹介文・メール・リンク候補を実装しています。
 特に `tosho427.sysdiv@gmail.com` を仕事用の公開先として継続使用するか、本人による最終確認が必要です。
-本番公開は未実施です。実装はPRでレビューします。
-
-既存のGitHub Pages用ベースパスとworkflowは保持しています。
-本番URL確定後にcanonical・`og:url`・必要に応じたOGP画像を設定し、公開後は実URLで表示・リンクを確認してください。
+GitHub Pagesで公開し、`main` へのpushで既存のworkflowがビルド・デプロイします。
+リポジトリ名は `re-system`、Viteのベースパスは `/re-system/` です。
+`index.html` のcanonical・`og:url`も公開URLに合わせています。
+旧公開URL `/SelfIntroductionPage/` は自動転送されないため、共有先やブックマークは新URLへ更新してください。
 
 ## アイコン
 
