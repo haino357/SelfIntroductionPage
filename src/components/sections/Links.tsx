@@ -1,6 +1,7 @@
 import styles from './Links.module.css';
 import blogIcon from '../../assets/icons/blog.svg';
 import githubIcon from '../../assets/icons/github.svg';
+import noteIcon from '../../assets/icons/note.svg';
 import qiitaIcon from '../../assets/icons/qiita.svg';
 import xIcon from '../../assets/icons/x.svg';
 import zennIcon from '../../assets/icons/zenn.svg';
@@ -8,7 +9,14 @@ import { profile } from '../../data/profile';
 
 import type { FC } from 'react';
 
-const icons = { github: githubIcon, x: xIcon, blog: blogIcon, zenn: zennIcon, qiita: qiitaIcon };
+const icons = {
+  github: githubIcon,
+  x: xIcon,
+  blog: blogIcon,
+  zenn: zennIcon,
+  qiita: qiitaIcon,
+  note: noteIcon,
+};
 
 export const Links: FC = () => (
   <section className={styles.links} aria-labelledby="links-title">

@@ -33,7 +33,7 @@ npm run preview
 
 - 小さな屋号 → プロフィール → メール → 活動・発信 → フッターの1カラム。
 - メールボタンは `mailto:`。アドレスは選択・コピーできる通常のテキストです。
-- 活動先はGitHub、X、はてなブログ、Zenn、Qiitaの順で、同じタブで開きます。
+- 活動先はGitHub、X、はてなブログ、Zenn、Qiita、noteの順で、同じタブで開きます。
 - 写真、フォーム、スキル・実績一覧、外部フォント・アイコンCDNは使用しません。
 - 従来の未使用コンポーネント・画像は保持しています。LPの表示には組み込んでいません。
 
@@ -50,5 +50,5 @@ npm run preview
 
 ## アイコン
 
-GitHub・X・Zenn・Qiitaは [Simple Icons](https://github.com/simple-icons/simple-icons) のSVGをローカルに保持しています（CC0、各商標は権利者に帰属）。
+GitHub・X・Zenn・Qiita・noteは [Simple Icons](https://github.com/simple-icons/simple-icons) のSVGをローカルに保持しています（CC0、各商標は権利者に帰属）。
 はてなブログの行は、このLP用の汎用ペンアイコンです。設計モックの画像を切り抜いたものではありません。
