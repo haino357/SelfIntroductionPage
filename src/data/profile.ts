@@ -1,7 +1,14 @@
 export interface ActivityLink {
-  readonly id: 'github' | 'x' | 'blog' | 'zenn' | 'qiita' | 'note';
+  readonly id: 'github' | 'blog' | 'zenn' | 'qiita' | 'note';
   readonly name: string;
   readonly description: string;
+  readonly url: string;
+}
+
+export interface SocialProfile {
+  readonly id: 'x' | 'instagram';
+  readonly name: string;
+  readonly handle: string;
   readonly url: string;
 }
 
@@ -16,6 +23,20 @@ export const profile = {
   ],
   email: 'tosho427.sysdiv@gmail.com',
   contactLabel: 'メールで問い合わせる',
+  socials: [
+    {
+      id: 'x',
+      name: 'X',
+      handle: '@hai_haino',
+      url: 'https://x.com/hai_haino',
+    },
+    {
+      id: 'instagram',
+      name: 'Instagram',
+      handle: '@hai_haino278',
+      url: 'https://www.instagram.com/hai_haino278',
+    },
+  ] satisfies readonly SocialProfile[],
   linksHeading: '活動・発信',
   links: [
     {
@@ -24,7 +45,6 @@ export const profile = {
       description: '開発・制作物',
       url: 'https://github.com/haino357',
     },
-    { id: 'x', name: 'X', description: '日々の発信', url: 'https://x.com/hai_haino' },
     {
       id: 'blog',
       name: 'はてなブログ',
