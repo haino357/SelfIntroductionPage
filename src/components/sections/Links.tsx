@@ -1,101 +1,47 @@
-import React from 'react';
-import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
-import type { LinkItem } from '../../types';
 import styles from './Links.module.css';
+import blogIcon from '../../assets/icons/blog.svg';
+import githubIcon from '../../assets/icons/github.svg';
+import xIcon from '../../assets/icons/x.svg';
+import zennIcon from '../../assets/icons/zenn.svg';
+import { profile } from '../../data/profile';
 
-const linksData: LinkItem[] = [
-    {
-        id: 1,
-        title: 'GitHub',
-        description: '開発したプロジェクトやオープンソースへの貢献',
-        url: 'https://github.com/haino357',
-        icon: 'fab fa-github',
-        category: 'Development',
-    },
-    {
-        id: 2,
-        title: 'X',
-        description: '技術情報や日々の活動を発信',
-        url: 'https://x.com/hai_haino',
-        icon: 'fab fa-x',
-        category: 'Social',
-    },
-    {
-        id: 3,
-        title: 'はてなブログ',
-        description: '読書記録などを記録',
-        url: 'https://hai-haino.hatenablog.com/',
-        icon: 'fas fa-edit',
-        category: 'Blog',
-    },
-    {
-        id: 4,
-        title: 'Qiita',
-        description: '技術記事の投稿・共有',
-        url: 'https://qiita.com/hai_haino',
-        icon: 'fas fa-book',
-        category: 'Tech Blog',
-    },
-    {
-        id: 5,
-        title: 'Zenn',
-        description: 'エンジニアのための情報発信',
-        url: 'https://zenn.dev/haitak',
-        icon: 'fas fa-feather-alt',
-        category: 'Tech Blog',
-    },
-    {
-        id: 6,
-        title: 'Note',
-        description: '個人的な思考や学びの記録',
-        url: 'https://note.com/hainote',
-        icon: 'fas fa-pencil-alt',
-        category: 'Blog',
-    },
-];
+import type { FC } from 'react';
 
-export const Links: React.FC = () => {
-    return (
-        <section className="section" id="links">
-            <div className="container">
-                <h2 className="section-title">リンク集</h2>
-                <p className={styles.sectionDescription}>
-                    日々の活動や情報発信をしているプラットフォームです
-                </p>
-                <div className={styles.linksGrid}>
-                    {linksData.map((link) => (
-                        <LinkCard key={link.id} {...link} />
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
-};
+const icons = { github: githubIcon, x: xIcon, blog: blogIcon, zenn: zennIcon };
 
-const LinkCard: React.FC<LinkItem> = ({ title, description, url, icon, category }) => {
-    const { elementRef, isVisible } = useIntersectionObserver();
-
-    return (
-        <a
-            ref={elementRef as unknown as React.RefObject<HTMLAnchorElement>}
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${styles.linkCard} ${isVisible ? 'fade-in' : ''}`}
-        >
-            <div className={styles.linkIcon}>
-                <i className={icon}></i>
-            </div>
-            <div className={styles.linkContent}>
-                <div className={styles.linkHeader}>
-                    <h3>{title}</h3>
-                    <span className={styles.category}>{category}</span>
-                </div>
-                <p>{description}</p>
-                <div className={styles.linkArrow}>
-                    <i className="fas fa-arrow-right"></i>
-                </div>
-            </div>
-        </a>
-    );
-};
+export const Links: FC = () => (
+  <section className={styles.links} aria-labelledby="links-title">
+    <h2 id="links-title" className={styles.heading}>
+      {profile.linksHeading}
+    </h2>
+    <ul className={styles.list}>
+      {profile.links.map((link) => (
+        <li key={link.id}>
+          <a className={styles.link} href={link.url}>
+            <img className={styles.icon} src={icons[link.id]} width="36" height="36" alt="" />
+            <span className={styles.content}>
+              <span className={styles.name}>{link.name}</span>
+              <span className={styles.description}>{link.description}</span>
+            </span>
+            <svg
+              className={styles.arrow}
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M5 19 19 5M5 5h14v14"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+);

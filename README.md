@@ -1,176 +1,54 @@
-# フリーランス自己紹介ページ
+# Re:system
 
-React + TypeScriptで構築されたモダンなフリーランス向けポートフォリオサイトです。GitHub Pagesでの公開に対応しています。
+自己紹介とお問い合わせ先、活動・発信先をまとめた日本語の1ページLPです。
+Obsidianの `self-introduction-lp-design`（2026-10-24）を基に、既存のReact・TypeScript・Viteプロジェクトを改修しています。
 
-## 🚀 特徴
-
-- **React + TypeScript**: 型安全で保守性の高いコード
-- **モダンなデザイン**: ダークモード、グラデーション、グラスモーフィズム効果
-- **レスポンシブ**: モバイル、タブレット、デスクトップに完全対応
-- **スムーズアニメーション**: Intersection Observerを使用したスクロールアニメーション
-- **SEO最適化**: セマンティックHTML、メタタグ、Open Graph対応
-- **高パフォーマンス**: Viteによる高速ビルド
-
-## 📁 プロジェクト構成
-
-```
-SelfIntroductionPage/
-├── src/
-│   ├── components/
-│   │   ├── layout/         # Header, Footer
-│   │   ├── sections/       # Hero, About, Skills, Portfolio, Contact
-│   │   └── common/         # 再利用可能なコンポーネント
-│   ├── hooks/              # カスタムフック
-│   ├── types/              # TypeScript型定義
-│   ├── styles/             # グローバルスタイル
-│   ├── App.tsx             # メインアプリケーション
-│   └── main.tsx            # エントリーポイント
-├── public/                 # 静的アセット
-├── index.html              # HTMLテンプレート
-├── package.json
-├── tsconfig.json
-└── vite.config.ts
-```
-
-## 🛠️ 使用技術
-
-- **React 18**: UIライブラリ
-- **TypeScript**: 型安全な開発
-- **Vite**: 高速ビルドツール
-- **CSS Modules**: スコープ付きスタイリング
-- **Google Fonts**: Inter & Outfit
-- **Font Awesome**: アイコン
-
-## ✏️ カスタマイズ方法
-
-### 1. 個人情報の編集
-
-`index.html` を開き、以下の部分を編集してください：
-
-- **名前**: `<div class="logo">YourName</div>` と `<title>` タグ
-- **職業・キャッチフレーズ**: ヒーローセクションの内容
-- **About Me**: 自己紹介文
-- **スキル**: スキルセクションのリスト
-- **実績**: ポートフォリオアイテムの内容
-- **連絡先**: メールアドレス、所在地、SNSリンク
-
-### 2. プロフィール画像の変更
-
-`images/profile.png` を自分の画像に置き換えてください。
-
-### 3. 色のカスタマイズ
-
-`css/style.css` の先頭にあるCSS変数を編集：
-
-```css
-:root {
-  --color-primary: #6366f1;    /* メインカラー */
-  --color-secondary: #06b6d4;  /* セカンダリカラー */
-  --color-accent: #8b5cf6;     /* アクセントカラー */
-  /* その他の色... */
-}
-```
-
-## 🌐 GitHub Pagesでの公開方法
-
-### 方法1: GitHub Web UIを使用
-
-1. GitHubで新しいリポジトリを作成
-2. ローカルのファイルをすべてアップロード
-3. リポジトリの **Settings** → **Pages** に移動
-4. **Source** で `main` ブランチを選択
-5. **Save** をクリック
-6. 数分後、`https://[あなたのユーザー名].github.io/[リポジトリ名]/` で公開されます
-
-### 方法2: Gitコマンドラインを使用
-
-```bash
-# リポジトリの初期化
-git init
-git add .
-git commit -m "Initial commit: Add portfolio website"
-
-# GitHubリポジトリに接続（事前にGitHubでリポジトリを作成）
-git remote add origin https://github.com/[ユーザー名]/[リポジトリ名].git
-git branch -M main
-git push -u origin main
-
-# GitHub Pagesの設定はWeb UIで行う
-```
-
-## 🖥️ ローカル実行方法
-
-### 1. 依存関係のインストール
-
-プロジェクトのルートディレクトリで以下を実行：
+## ローカルで確認する
 
 ```bash
 npm install
-```
-
-### 2. 開発サーバーの起動
-
-```bash
 npm run dev
 ```
 
-ブラウザで `http://localhost:5173` を開く（Viteのデフォルトポート）
-
-### 3. プロダクションビルド
+表示URLはターミナルの案内を参照してください。既存のベースパスは `/SelfIntroductionPage/` です。
 
 ```bash
 npm run build
-```
-
-ビルドされたファイルは `dist/` ディレクトリに出力されます。
-
-### 4. プロダクションビルドのプレビュー
-
-```bash
+npm run type-check
 npm run preview
 ```
 
-ビルド後のファイルをローカルで確認できます。
+ビルド結果は `dist/` に出力されます。
 
-### その他の便利なコマンド
+## 原稿・連絡先の更新
 
-```bash
-# TypeScriptの型チェック
-npm run type-check
+[`src/data/profile.ts`](src/data/profile.ts) に屋号、肩書き、紹介文、メールアドレス、活動先リンクを集約しています。
+屋号は上部・見出し・フッターで共有し、フッターの年は表示時点の年になります。
+リンク一覧の順序は配列順です。URLのない項目は配列に含めないでください。
 
-# ESLintでコードチェック
-npm run lint
+ページ名と紹介文を変えた場合は、`index.html` のtitle・description・author・OGPも合わせて更新してください。
+色と標準フォントは `src/styles/variables.css`、各部分のレイアウトは対応するCSS Modulesで調整できます。
 
-# ESLintで自動修正
-npm run lint:fix
+## 構成と操作
 
-# Prettierでコード整形
-npm run format
+- 小さな屋号 → プロフィール → メール → 活動・発信 → フッターの1カラム。
+- メールボタンは `mailto:`。アドレスは選択・コピーできる通常のテキストです。
+- 活動先はGitHub、X、はてなブログ、Zennの順で、同じタブで開きます。
+- 写真、フォーム、スキル・実績一覧、外部フォント・アイコンCDNは使用しません。
+- 従来の未使用コンポーネント・画像は保持しています。LPの表示には組み込んでいません。
 
-# Prettierでフォーマットチェック
-npm run format:check
-```
+[実装用の設計メモと参照画像](docs/design.md) ／ [確認結果](docs/verification.md)
 
-## 📧 お問い合わせフォームについて
+## 公開前の確認
 
-現在のフォームはデモンストレーション用です。実際に機能させるには、以下のサービスを統合してください：
+設計書第5節の肩書き・紹介文・メール・リンク候補を実装しています。
+特に `tosho427.sysdiv@gmail.com` を仕事用の公開先として継続使用するか、本人による最終確認が必要です。
+本作業では公開、commit、pushを行っていません。
 
-- **Formspree**: https://formspree.io/
-- **EmailJS**: https://www.emailjs.com/
-- **Netlify Forms**: Netlifyにデプロイする場合
-- 独自のバックエンドAPI
+既存のGitHub Pages用ベースパスとworkflowは保持しています。
+本番URL確定後にcanonical・`og:url`・必要に応じたOGP画像を設定し、公開後は実URLで表示・リンクを確認してください。
 
-## 📝 ライセンス
+## アイコン
 
-このテンプレートは自由に使用・カスタマイズできます。
-
-## 🎨 デザインのヒント
-
-- **配色**: [Coolors](https://coolors.co/) でカラーパレットを探す
-- **フォント**: [Google Fonts](https://fonts.google.com/) で別のフォントを試す
-- **アイコン**: [Font Awesome](https://fontawesome.com/) で追加アイコンを探す
-- **画像**: [Unsplash](https://unsplash.com/) でプロフェッショナルな写真を探す
-
----
-
-作成日: 2025年11月21日
+GitHub・X・Zennは [Simple Icons](https://github.com/simple-icons/simple-icons) のSVGをローカルに保持しています（CC0、各商標は権利者に帰属）。
+はてなブログの行は、このLP用の汎用ペンアイコンです。設計モックの画像を切り抜いたものではありません。
