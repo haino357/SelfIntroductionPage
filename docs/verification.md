@@ -48,3 +48,15 @@
 - noteのローカルSVGを表示し、360・390・768・1440px幅で横スクロールがないことを再確認。
 - Tabキーでnoteに到達し、リンク先と3pxのフォーカス枠を確認。
 - `npm run build`、変更箇所のESLint互換モード、Prettier、`git diff --check`を通過。PC・モバイルのスクリーンショットを更新。
+
+## SNS・QRコード追加の確認（2026-10-24）
+
+- メールの下に「SNS」を追加。X（`https://x.com/hai_haino`）と、本人から指定されたInstagram（`https://www.instagram.com/hai_haino278`）へのリンク・QRコードを表示。
+- Xは「活動・発信」からSNSへ移動。「活動・発信」はGitHub・はてなブログ・Zenn・Qiita・noteの5件。
+- `qrcode.react` を追加し、リンクの `href` と同じURLからSVGを生成。黒地のモジュール・白背景・4モジュールの余白を確保し、外部QR生成サービスは使用しない。
+- 本番ビルドを `vite preview` の `/SelfIntroductionPage/` で表示。全アイコンが読み込まれ、ブラウザコンソールにerror/warnなし。
+- 360・390・480・768・1440px幅で横スクロールなし。480px未満は1列、480px以上は2列。
+- メール→X→InstagramのTab移動と、各SNSカードの3pxフォーカス枠・リンク先を確認。外部プロフィールへの実際の遷移は未実施。
+- PC・モバイルのスクリーンショットを更新。両画像のQRコードをmacOS Core Imageで読み取り、X・Instagramの両URLが指定値と完全一致することを確認。実機カメラでの読み取りは未確認。
+- `npm run build`、`npm run type-check`、変更したTS/TSXのESLint互換モード、変更したTS/TSX/CSSのPrettier、`git diff --check`を通過。
+- 本番公開は未実施。
